@@ -16,7 +16,7 @@ public class MainController {
     @Autowired
     private JpaRepository jpaRepository;
 
-    @RequestMapping(path = "/add") // Map ONLY POST Requests
+    @RequestMapping(path = "/add") //, Map ONLY POST Requests
     @ResponseBody
     public String addNewUser(@RequestParam String name
             , @RequestParam String email) {
