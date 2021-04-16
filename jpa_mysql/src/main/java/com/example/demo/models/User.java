@@ -10,7 +10,7 @@ public class User {
     private Integer id;
 
     private String name;
-    @Column(name = "thisemail")
+
     private String email;
 
     public Integer getId() {

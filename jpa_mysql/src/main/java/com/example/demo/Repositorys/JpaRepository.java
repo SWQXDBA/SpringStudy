@@ -30,11 +30,28 @@ public class JpaRepository implements UserRepository {
         return list;
     }
 
+    public List<User> findemail(String email) {
+        String jpql = " from User where email like ?1";
+        Query query = em.createQuery(jpql);
+        query.setParameter(1, email);
+        return query.getResultList();
+    }
+
     public Long findAllCount() {
         String jpql = "select count(id) from User order by id desc";
         Query query = em.createQuery(jpql);
         Long i = (Long) query.getSingleResult();
         return i;
+    }
+
+    public List<User> findAllPage() {
+        String jpql = " from User";
+        Query query = em.createQuery(jpql);
+        query.setFirstResult(0);
+        //从1-2 不包括0
+        query.setMaxResults(2);
+        return query.getResultList();
+
     }
 
     @Override

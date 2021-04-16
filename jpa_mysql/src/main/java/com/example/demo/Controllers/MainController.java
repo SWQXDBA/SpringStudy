@@ -51,5 +51,17 @@ public class MainController {
         return jpaRepository.findAllCount();
     }
 
+    @ResponseBody
+    @RequestMapping(path = "/page")
+    public List<User> page() {
+        // This returns a JSON or XML with the users
+        return jpaRepository.findAllPage();
+    }
 
+    @ResponseBody
+    @RequestMapping(path = "/email")
+    public List<User> findByEmail(@RequestParam String email) {
+        // This returns a JSON or XML with the users
+        return jpaRepository.findemail(email);
+    }
 }
