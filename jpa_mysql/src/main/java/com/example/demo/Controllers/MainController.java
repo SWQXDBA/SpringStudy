@@ -1,6 +1,6 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Repositorys.JpaRepository;
+import com.example.demo.Repositorys.MyJpaRepository;
 import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/demo")
 public class MainController {
     @Autowired
-    private JpaRepository jpaRepository;
+    private MyJpaRepository jpaRepository;
 
     @RequestMapping(path = "/add") //, Map ONLY POST Requests
     @ResponseBody
