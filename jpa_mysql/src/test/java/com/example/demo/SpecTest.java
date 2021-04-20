@@ -5,6 +5,7 @@ import com.example.demo.models.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
@@ -66,6 +67,26 @@ public class SpecTest {
             }
         };
         List<User> users = userDao.findAll(specification);
+        System.out.println(users);
+    }
+
+
+    @Test
+    //模糊匹配+排序
+    public void t4() {
+        Specification<User> specification = new Specification<User>() {
+            @Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Path<Object> path = root.get("name");
+                Predicate predicate = criteriaBuilder.like(path.as(String.class), "%name%");
+                return predicate;
+
+            }
+        };
+        //framwork中的sort
+        //Sort.Direction.ASC升序
+        //Sort.Direction.DESC倒序
+        List<User> users = userDao.findAll(specification, Sort.by(Sort.Direction.ASC, "id"));
         System.out.println(users);
     }
 }
