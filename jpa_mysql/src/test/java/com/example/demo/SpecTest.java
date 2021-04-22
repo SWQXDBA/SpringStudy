@@ -5,6 +5,9 @@ import com.example.demo.models.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -88,5 +91,28 @@ public class SpecTest {
         //Sort.Direction.DESC倒序
         List<User> users = userDao.findAll(specification, Sort.by(Sort.Direction.ASC, "id"));
         System.out.println(users);
+    }
+
+    @Test
+    //分页查询
+    public void t5() {
+        Specification<User> specification = new Specification<User>() {
+            @Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Path<Object> path = root.get("name");
+                Predicate predicate = criteriaBuilder.like(path.as(String.class), "%name%");
+                return predicate;
+            }
+        };
+        //从0就是第一页开始 每页2个
+        //改了 原来是new一个PageRequest然后传入参数 现在用工厂模式
+        Pageable pageable = PageRequest.of(0, 2);
+        Page<User> page = userDao.findAll(specification, pageable);
+        System.out.println(page.getTotalElements());//打印总条数
+        System.out.println(page.getTotalPages());//有几页
+        List<User> users = page.getContent();//获取userList
+        System.out.println(users);
+        System.out.println(page.getContent());//打印一样的东西
+
     }
 }

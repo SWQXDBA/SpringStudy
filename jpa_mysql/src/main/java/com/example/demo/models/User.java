@@ -3,7 +3,7 @@ package com.example.demo.models;
 import javax.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "MyUserData")
+@Table(name = "my_user_data")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +35,19 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @ManyToOne(targetEntity = Teacher.class)
+    //两方配置了同一个外键
+    @JoinColumn(name = "user_teacher_id", referencedColumnName = "TeacherId")
+    private Teacher teacher;
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     @Override
