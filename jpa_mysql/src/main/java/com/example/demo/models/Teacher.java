@@ -12,7 +12,7 @@ public class Teacher {
     @Column(name = "TeacherId")
     private Long id;
     //targetEntity = Teacher.class可以不用
-    @OneToMany(targetEntity = User.class)
+    @OneToMany(targetEntity = User.class, cascade = CascadeType.ALL)
     //name设置的是这个表中外键的名字
     //referencedColumnName设置的是这个表中外键是什么
     //由于是一对多，所以说这个是体现在从表中 从从表中找到主表的主键进行映射！！！重点理解
