@@ -7,20 +7,21 @@ import java.util.Set;
 @Entity
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Role_id")
     private Long id;
 
-    private String roleis;
-    @ManyToMany(targetEntity = Employee.class, cascade = CascadeType.ALL)
-    @JoinTable(name = "employee_role",
-            //joinColumns 自己在中间表的外键
-            joinColumns = {
-                    @JoinColumn(name = "Role_id", referencedColumnName = "Role_id")
-            },
-            // inverseJoinColumns 对方在中间表的外键
-            inverseJoinColumns = {@JoinColumn(name = "Employee_id", referencedColumnName = "Employee_id")}
-    )
+    private String roleName;
+    //    @ManyToMany(targetEntity = Employee.class, cascade = CascadeType.ALL)
+//    @JoinTable(name = "employee_role",
+//            //joinColumns 自己在中间表的外键
+//            joinColumns = {
+//                    @JoinColumn(name = "Roleid", referencedColumnName = "Role_id")
+//            },
+//            // inverseJoinColumns 对方在中间表的外键
+//            inverseJoinColumns = {@JoinColumn(name = "Employeeid", referencedColumnName = "Employee_id")}
+//    )
+    @ManyToMany(mappedBy = "RoleSet")
     private Set<Employee> employeeSet = new HashSet<>();
 
     public Long getId() {
@@ -31,12 +32,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getRoleis() {
-        return roleis;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRoleis(String roleis) {
-        this.roleis = roleis;
+    public void setRoleName(String roleis) {
+        this.roleName = roleis;
     }
 
     public Set<Employee> getEmployeeSet() {
@@ -45,5 +46,14 @@ public class Role {
 
     public void setEmployeeSet(Set<Employee> employeeSet) {
         this.employeeSet = employeeSet;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                ", employeeSet=" + employeeSet +
+                '}';
     }
 }

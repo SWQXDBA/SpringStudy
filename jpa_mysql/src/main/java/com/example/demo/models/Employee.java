@@ -7,9 +7,10 @@ import java.util.Set;
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Employee_id")
     private Long id;
+
     private String Name;
 
 
@@ -19,12 +20,12 @@ public class Employee {
     @JoinTable(name = "employee_role",
             //joinColumns 自己在中间表的外键
             joinColumns = {
-                    @JoinColumn(name = "Employee_id", referencedColumnName = "Employee_id")
+                    @JoinColumn(name = "Employeeid", referencedColumnName = "Employee_id")
             },
             // inverseJoinColumns 对方在中间表的外键
-            inverseJoinColumns = {@JoinColumn(name = "Role_id", referencedColumnName = "Role_id")}
+            inverseJoinColumns = {@JoinColumn(name = "Roleid", referencedColumnName = "Role_id")}
     )
-    private Set<Role> employeeSet = new HashSet<>();
+    private Set<Role> RoleSet = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -40,5 +41,13 @@ public class Employee {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public Set<Role> getRoleSet() {
+        return RoleSet;
+    }
+
+    public void setRoleSet(Set<Role> employeeSet) {
+        this.RoleSet = employeeSet;
     }
 }
