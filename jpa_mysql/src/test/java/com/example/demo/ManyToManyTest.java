@@ -21,7 +21,7 @@ public class ManyToManyTest {
         role.setRoleName("rolename1");
 
         Role role2 = new Role();
-        role.setRoleName("rolename2");
+        role2.setRoleName("rolename2");
 
         Employee employee = new Employee();
         employee.setName("employeename1");
@@ -56,5 +56,18 @@ public class ManyToManyTest {
         employeeDao.save(employee);
 
 
+    }
+
+    @Test
+    public void deleteOneEmployee() {
+        Employee employee = employeeDao.findById(1L).get();
+        employeeDao.delete(employee);
+    }
+
+    //对象导航查询
+    @Test
+    public void ObjetQueryTest() {
+        Employee employee = employeeDao.findById(1L).get();
+        employeeDao.delete(employee);
     }
 }

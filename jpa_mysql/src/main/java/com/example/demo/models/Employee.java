@@ -14,7 +14,7 @@ public class Employee {
     private String Name;
 
 
-    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     //配置中间表
     //name 中间表名称
     @JoinTable(name = "employee_role",

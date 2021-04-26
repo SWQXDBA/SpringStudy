@@ -21,7 +21,7 @@ public class Role {
 //            // inverseJoinColumns 对方在中间表的外键
 //            inverseJoinColumns = {@JoinColumn(name = "Employeeid", referencedColumnName = "Employee_id")}
 //    )
-    @ManyToMany(mappedBy = "RoleSet")
+    @ManyToMany(mappedBy = "RoleSet", fetch = FetchType.EAGER)
     private Set<Employee> employeeSet = new HashSet<>();
 
     public Long getId() {

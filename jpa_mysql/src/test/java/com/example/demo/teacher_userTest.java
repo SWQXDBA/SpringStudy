@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Set;
+
 @SpringBootTest
 public class teacher_userTest {
     @Autowired
@@ -71,5 +73,16 @@ public class teacher_userTest {
     public void delete() {
 
         teacherDao.deleteAll();
+    }
+
+
+    //对象导航查询
+    @Test
+    public void ObjetQueryTest() {
+        Teacher teacher = teacherDao.findById(2L).get();
+        Set<User> users = teacher.getUsers();
+        for (User user : users) {
+            System.out.println(user);
+        }
     }
 }

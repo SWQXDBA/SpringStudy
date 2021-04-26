@@ -6,11 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="jpaStudy" />
         <module name="demo" />
         <module name="accessing-data-mysql" />
+        <module name="jpa_mysql" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="advicestudy" target="11" />
+      <module name="jsonstudy" target="11" />
       <module name="springStudy" target="15" />
     </bytecodeTargetLevel>
   </component>
@@ -18,6 +22,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="accessing-data-mysql" options="-parameters" />
       <module name="demo" options="-parameters" />
+      <module name="jpaStudy" options="-parameters" />
+      <module name="jpa_mysql" options="-parameters" />
     </option>
   </component>
 </project>
